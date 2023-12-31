@@ -3,7 +3,10 @@ package com.paccy.demo.controller;
 
 import com.paccy.demo.entity.Department;
 import com.paccy.demo.service.DepartmentService;
-import com.paccy.demo.service.DepartmentServiceImpl;
+
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +18,16 @@ import java.util.List;
 public class DepartmentController {
     @Autowired
     private  DepartmentService departmentService;
+    private  final Logger LOGGER= LoggerFactory.getLogger(DepartmentController.class);
+
     @PostMapping("/departments")
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){
+        LOGGER.info("At saveDepartment in DepartmentController");
      return  departmentService.saveDepartment(department);
     }
     @GetMapping("/departments")
     public List<Department> fetchDepartments(){
+        LOGGER.info("At getDepartments in DepartmentController");
         return departmentService.fetchDepartments();
     }
 
@@ -48,5 +55,7 @@ public class DepartmentController {
     public Department findDepartmentByName(@PathVariable("name") String departmentName){
         return  departmentService.findDepartmentByName(departmentName);
     }
+
+
 
 }
