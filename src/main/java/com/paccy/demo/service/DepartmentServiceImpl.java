@@ -1,12 +1,14 @@
 package com.paccy.demo.service;
 
 import com.paccy.demo.entity.Department;
+import com.paccy.demo.error.DepartmentNotFoundError;
 import com.paccy.demo.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -24,8 +26,12 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Department fetchDepartmentById(Long departmentId) {
-         return   departmentRepository.findById(departmentId).get();
+    public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundError {
+         Optional<Department> department=departmentRepository.findById(departmentId);
+         if(!department.isPresent()){
+             throw new DepartmentNotFoundError("Department NOt Found");
+         }
+         return  department.get();
     }
 
     @Override

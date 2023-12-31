@@ -2,6 +2,7 @@ package com.paccy.demo.controller;
 
 
 import com.paccy.demo.entity.Department;
+import com.paccy.demo.error.DepartmentNotFoundError;
 import com.paccy.demo.service.DepartmentService;
 
 import jakarta.validation.Valid;
@@ -32,11 +33,11 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public  Department fetchDepartmentById(@PathVariable("id") Long departmentId){
+    public  Department fetchDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundError {
         return departmentService.fetchDepartmentById(departmentId);
     }
     @DeleteMapping("/departments/{id}")
-    public ResponseEntity<String> deleteDepartmentById(@PathVariable("id") Long departmentId) {
+    public ResponseEntity<String> deleteDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundError{
         try {
             departmentService.deleteDepartmentById(departmentId);
             return ResponseEntity.ok("Department Deleted Successfully");

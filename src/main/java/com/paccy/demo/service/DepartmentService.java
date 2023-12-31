@@ -2,6 +2,7 @@ package com.paccy.demo.service;
 
 
 import com.paccy.demo.entity.Department;
+import com.paccy.demo.error.DepartmentNotFoundError;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface DepartmentService {
 
     Department saveDepartment(Department department);
 
-    Department fetchDepartmentById(Long departmentId);
+    Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundError;
 
     void deleteDepartmentById(Long departmentId);
 
