@@ -23,5 +23,5 @@ public interface DepartmentService {
     Department findDepartmentByName(String departmentName);
 
 
-
+   Department fetchDepartmentByName(String departmentName);
 }
