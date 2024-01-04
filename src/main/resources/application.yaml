@@ -1,11 +1,32 @@
+server:
+  port: 8000
+
+---
+
+
 # Enable DevTools
 spring:
-  devtools:
-    restart:
-      enabled: true
+  config:
+    activate:
+      on-profile: dev
+#  devtools:
+#    restart:
+#      enabled: true
+#
+#    # Specify additional paths to watch for changes (comma-separated)
+#    additional-paths: src/main/java,src/main/resources
+#
+#    # Specify file patterns that trigger a restart (comma-separated)
+#    trigger-file: '**/*.class'
 
-    # Specify additional paths to watch for changes (comma-separated)
-    additional-paths: src/main/java,src/main/resources
+  datasource:
 
-    # Specify file patterns that trigger a restart (comma-separated)
-    trigger-file: '**/*.class'
+    driver-class-name: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+  database-platform: org.hibernate.dialect.H2Dialect
+
+welcome:
+  message: Paccy IS welcoming all of you
